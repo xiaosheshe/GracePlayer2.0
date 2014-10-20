@@ -45,6 +45,8 @@ import com.graceplayer.data.MusicList;
 import com.graceplayer.graceplayer.R;
 import com.graceplayer.model.PropertyBean;
 
+import static com.graceplayer.graceplayer.R.drawable.ic_player_mode_sequence_default;
+
 public class MainActivity extends Activity {
 	
 	// 进度条控制常量
@@ -56,6 +58,7 @@ public class MainActivity extends Activity {
 	private static final int MODE_LIST_SEQUENCE= 0;
 	private static final int MODE_SINGLE_CYCLE = 1;
 	private static final int MODE_LIST_CYCLE = 2;
+    private  static final int MODE_LIST_RANDOM=3;
 	private int playmode;
 	
 	// 显示组件
@@ -96,6 +99,8 @@ public class MainActivity extends Activity {
 	private Timer timer_sleep ;
 	private static final boolean NOTSLEEP = false;
 	private static final boolean ISSLEEP = true;
+    //播放模式组件
+    private ImageView iv_playmode;
 	//默认的睡眠时间
 	private int sleepminute = 20;
 	//标记是否打开睡眠模式
@@ -140,6 +145,7 @@ public class MainActivity extends Activity {
 		tv_vol = (TextView)findViewById(R.id.main_tv_volumeText);
 		seekbar_vol = (SeekBar)findViewById(R.id.main_sb_volumebar);
 		iv_sleep = (ImageView)findViewById(R.id.main_iv_sleep);
+        iv_playmode = (ImageView)findViewById(R.id.main_iv_playmode);
 	}
 
 	/** 为显示组件注册监听器 */
@@ -396,6 +402,11 @@ public class MainActivity extends Activity {
 					}
 					else sendBroadcastOnCommand(MusicService.COMMAND_NEXT);
 				}
+                else if(playmode == MainActivity.MODE_LIST_RANDOM)
+                {
+                    number=  (int)(Math.random()*musicArrayList.size());
+                    sendBroadcastOnCommand(MusicService.COMMAND_PLAY);
+                }
 				
 				seekBarHandler.sendEmptyMessage(PROGRESS_RESET);
 				MainActivity.this.setTitle("GracePlayer");
@@ -528,7 +539,7 @@ public class MainActivity extends Activity {
 			}).show();
 			break;
 		case R.id.menu_playmode:
-			String[] mode = new String[] { "顺序播放", "单曲循环", "列表循环" };
+			String[] mode = new String[] { "顺序播放", "单曲循环", "列表循环","随机播放" };
 			AlertDialog.Builder builder = new AlertDialog.Builder(
 					MainActivity.this);
 			builder.setTitle("播放模式");
@@ -548,16 +559,24 @@ public class MainActivity extends Activity {
 							switch (playmode) {
 							case 0:
 								playmode = MainActivity.MODE_LIST_SEQUENCE;
+                                iv_playmode.setBackgroundResource(R.drawable.ic_player_mode_sequence_default);
 								Toast.makeText(getApplicationContext(), R.string.sequence, Toast.LENGTH_SHORT).show();
 								break;
 							case 1:
 								playmode = MainActivity.MODE_SINGLE_CYCLE;
+                                iv_playmode.setBackgroundResource(R.drawable.ic_player_mode_single_default);
 								Toast.makeText(getApplicationContext(), R.string.singlecycle, Toast.LENGTH_SHORT).show();
 								break;
 							case 2:
 								playmode = MainActivity.MODE_LIST_CYCLE;
+                                iv_playmode.setBackgroundResource(R.drawable.ic_player_mode_all_default);
 								Toast.makeText(getApplicationContext(), R.string.listcycle, Toast.LENGTH_SHORT).show();
 								break;
+                                case 3:
+                                    playmode = MainActivity.MODE_LIST_RANDOM;
+                                    iv_playmode.setBackgroundResource(R.drawable.ic_player_mode_random_default);
+                                    Toast.makeText(getApplicationContext(), R.string.random, Toast.LENGTH_SHORT).show();
+                                    break;
 							default:
 								break;
 							}
