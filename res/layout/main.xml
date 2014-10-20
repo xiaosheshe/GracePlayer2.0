@@ -121,8 +121,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:text="00:00" />
+            <ImageView
+                    android:layout_toRightOf="@+id/main_tv_curtime"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/main_iv_playmode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_player_mode_sequence_default"
+                    android:background="@drawable/ic_player_mode_sequence_default"
+                    />
             <ImageView 
-                android:layout_toRightOf="@+id/main_tv_curtime"
+                android:layout_toRightOf="@+id/main_iv_playmode"
                 android:layout_marginLeft="5dp"
                 android:id="@+id/main_iv_sleep"
                 android:layout_width="wrap_content"
