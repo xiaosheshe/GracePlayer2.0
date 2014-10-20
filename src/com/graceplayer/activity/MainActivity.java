@@ -45,7 +45,7 @@ import com.graceplayer.data.MusicList;
 import com.graceplayer.graceplayer.R;
 import com.graceplayer.model.PropertyBean;
 
-import static com.graceplayer.graceplayer.R.drawable.ic_player_mode_sequence_default;
+
 
 public class MainActivity extends Activity {
 	
@@ -406,6 +406,11 @@ public class MainActivity extends Activity {
                 {
                     number=  (int)(Math.random()*musicArrayList.size());
                     sendBroadcastOnCommand(MusicService.COMMAND_PLAY);
+                    sendBroadcastOnCommand(MusicService.COMMAND_NEXT);
+                    sendBroadcastOnCommand(MusicService.COMMAND_PREVIOUS);
+
+
+
                 }
 				
 				seekBarHandler.sendEmptyMessage(PROGRESS_RESET);
