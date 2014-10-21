@@ -54,7 +54,7 @@
         android:fastScrollEnabled="true"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:background="@drawable/widget_bg"
+
         android:cacheColorHint="#00000000" />
 
     <LinearLayout
@@ -65,7 +65,7 @@
         android:layout_marginBottom="10dip"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
-        android:background="@drawable/widget_bg"
+
         android:orientation="vertical" >
 
         <LinearLayout
